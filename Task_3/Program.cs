@@ -4,7 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        string connectionString = @"Server=DESKTOP-D9JAIFC\SQLEXPRESS;Database=Tasks;Trusted_Connection=True;TrustServerCertificate=True;";
+        var builder = WebApplication.CreateBuilder(args);
+    
+        string connectionString = builder.Configuration.GetConnectionString("Connection");
 
         IConnectionFactory connectionFactory = new ConnectionFactory(connectionString);
 
@@ -154,7 +156,7 @@ class Program
 
         while (true)
         {
-            Console.Write("Введите ID задачи для удаления: ");
+            Console.Write("Введите ID задачи : ");
             if (!int.TryParse(Console.ReadLine(), out int result) || repository.GetTaskById(result) == null)
             {
                 Console.WriteLine("Некорректный ID.");
