@@ -6,6 +6,7 @@ class Program
     {
         var builder = WebApplication.CreateBuilder(args);
     
+
         string connectionString = builder.Configuration.GetConnectionString("Connection");
 
         IConnectionFactory connectionFactory = new ConnectionFactory(connectionString);
