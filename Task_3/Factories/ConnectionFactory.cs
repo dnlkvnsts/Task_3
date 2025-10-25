@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
+using Task_3.Interfaces;
 
-namespace Task_3.Models
+namespace Task_3.Factories
 {
     public class ConnectionFactory : IConnectionFactory
     {

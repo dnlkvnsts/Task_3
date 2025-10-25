@@ -1,3 +1,5 @@
+using Task_3.Factories;
+using Task_3.Interfaces;
 using Task_3.Models;
 
 class Program
@@ -16,14 +18,14 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("Управление задачами:");
-            Console.WriteLine("1. Добавить задачу");
-            Console.WriteLine("2. Показать все задачи");
-            Console.WriteLine("3. Обновить статус задачи");
-            Console.WriteLine("4. Удалить задачу");
-            Console.WriteLine("5. Выход");
+            Console.WriteLine("Menu:");
+            Console.WriteLine("1. Add task");
+            Console.WriteLine("2. Get all tasks");
+            Console.WriteLine("3. Update condition of task");
+            Console.WriteLine("4. Remove task");
+            Console.WriteLine("5. Exit");
 
-            Console.Write("Выберите действие: ");
+            Console.Write("Make a choice: ");
             string input = Console.ReadLine();
 
             int choice = checkChoice(input);
@@ -53,10 +55,10 @@ class Program
 
     static void AddNewTaskMethod(ITaskRepository repository)
     {
-        Console.Write("Введите название: ");
+        Console.Write("Input a name: ");
         string title = checkInput();
 
-        Console.Write("Введите описание : ");
+        Console.Write("Input a description : ");
         string description = checkInput();
 
         var task = new TaskItem
@@ -68,7 +70,7 @@ class Program
         };
 
         repository.AddNewTask(task);
-        Console.WriteLine("Задача добавлена");
+        Console.WriteLine("The task was added");
     }
 
 
@@ -77,12 +79,12 @@ class Program
         var tasks = repository.ShowAllTasks();
         if (tasks.Count == 0)
         {
-            Console.WriteLine("Список пуст ");
+            Console.WriteLine("List is empty ");
         }
 
         foreach (var task in tasks)
         {
-            Console.WriteLine($"ID: {task.Id}, Название: {task.Title},Статус: {(task.IsCompleted ? "Сделано" : "Не сделано")}");
+            Console.WriteLine($"ID: {task.Id}, Name: {task.Title}, Status: {(task.IsCompleted ? "Done" : "Not done")}");
 
         }
     }
@@ -93,17 +95,17 @@ class Program
         int id = checkId(repository);
         while (true)
         {
-            Console.Write("Задача сделана? (true/false): ");
+            Console.Write("Is the task  made? (true/false): ");
             if (bool.TryParse(Console.ReadLine(), out bool isCompleted))
             {
                 repository.UpdateTaskCondition(id, isCompleted);
-                Console.WriteLine("Состояние обновлено.");
+                Console.WriteLine("The condition was updated.");
                 return;
             }
             else
             {
 
-                Console.WriteLine("Некорректный ввод состояния.");
+                Console.WriteLine("Incorrect input of state.");
                 continue;
             }
         }
@@ -114,7 +116,7 @@ class Program
     {
         int id = checkId(repository);
         repository.RemoveTaskById(id);
-        Console.WriteLine("Задача удалена.");
+        Console.WriteLine("The task was deleted.");
         return;
 
     }
@@ -131,7 +133,7 @@ class Program
                 return input;
             }
 
-            Console.WriteLine("Введите корректное значение");
+            Console.WriteLine("Input correct data");
             input = Console.ReadLine();
         }
     }
@@ -146,7 +148,7 @@ class Program
 
             }
 
-            Console.WriteLine("Неверный выбор. Попробуйте снова.");
+            Console.WriteLine("An incorrect choice. Try again.");
             input = Console.ReadLine();
         }
     }
@@ -157,10 +159,10 @@ class Program
 
         while (true)
         {
-            Console.Write("Введите ID задачи : ");
+            Console.Write("Input ID of task : ");
             if (!int.TryParse(Console.ReadLine(), out int result) || repository.GetTaskById(result) == null)
             {
-                Console.WriteLine("Некорректный ID.");
+                Console.WriteLine("Incorrect ID.");
                 continue;
             }
             int id = result;

@@ -1,4 +1,7 @@
-﻿namespace Task_3.Models
+﻿using Task_3.Models;
+
+namespace Task_3.Interfaces
+
 {
     public interface ITaskRepository
     {

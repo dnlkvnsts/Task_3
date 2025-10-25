@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace Task_3.Models
+namespace Task_3.Interfaces
 {
     public interface IConnectionFactory
     {

@@ -1,5 +1,6 @@
 ﻿using Task_3.Models;
 using Dapper;
+using Task_3.Interfaces;
 
 public class TaskRepository : ITaskRepository
 {
